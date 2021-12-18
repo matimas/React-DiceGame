@@ -1,0 +1,97 @@
+.dice-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: inherit;
+}
+.dices {
+	display: flex;
+	flex-direction: row;
+}
+#dice1,
+#dice2 {
+	width: 50px;
+	height: 50px;
+	border: 1px solid black;
+	margin: 0px 0px 20px 6px;
+}
+.ThrowDiceButtton {
+	width: 140px;
+	height: 45px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: #000;
+	background-color: #fff;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+.ThrowDiceButtton:hover {
+	background-color: #2ee59d;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
+.six-message {
+	background: url('assets/img/sixmessage.jpg') no-repeat center center/cover;
+	height: 200px;
+	width: 150px;
+	font-size: 30px;
+	border-radius: 10px;
+	transform: translateY(360);
+	position: relative;
+	top: -30px;
+}
+.number1 {
+	background: url('assets/img/dice-1.png') no-repeat center center/cover;
+}
+.number2 {
+	background: url('assets/img/dice-2.png') no-repeat center center/cover;
+}
+.number3 {
+	background: url('assets/img/dice-3.png') no-repeat center center/cover;
+}
+.number4 {
+	background: url('assets/img/dice-4.png') no-repeat center center/cover;
+}
+.number5 {
+	background: url('assets/img/dice-5.png') no-repeat center center/cover;
+}
+.number6 {
+	background: url('assets/img/dice-6.png') no-repeat center center/cover;
+}
+/* 
+.dice1-shaking {
+	animation-name: wobble;
+	animation-duration: 1s;
+}
+
+@keyframes wobble {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+	15% {
+		transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+	}
+	30% {
+		transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+	}
+	45% {
+		transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+	}
+	60% {
+		transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+	}
+	75% {
+		transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+	}
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}  */
