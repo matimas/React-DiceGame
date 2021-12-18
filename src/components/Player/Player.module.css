@@ -1,12 +1,12 @@
 .player {
 	width: 400px;
-	height: 696px;
+	height: 700px;
 	display: flex;
 	flex-direction: column;
 	background: grey;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 50px;
+	font-size: 70px;
 	font-family: fantasy;
 }
 .player h2 {

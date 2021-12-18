@@ -32,19 +32,21 @@ class Board extends React.Component {
 	checkIfWin = () => {
 		console.log(this.state.playerTurn);
 		if (this.state.playerTurn === 1) {
-			setTimeout(() => {
-				if (this.state.p2Score >= this.state.winScore) {
-					console.log('winner');
-					this.resetGame();
-				}
-			}, 5000);
+			if (this.state.p2Score >= this.state.winScore) {
+				this.setState({ isWinner: true });
+				this.resetGame();
+				setTimeout(() => {
+					this.setState({ isWinner: false });
+				}, 2000);
+			}
 		} else {
-			setTimeout(() => {
-				if (this.state.p1Score >= this.state.winScore) {
-					console.log('winner');
-					this.resetGame();
-				}
-			}, 5000);
+			if (this.state.p1Score >= this.state.winScore) {
+				this.setState({ isWinner: true });
+				this.resetGame();
+				setTimeout(() => {
+					this.setState({ isWinner: false });
+				}, 2000);
+			}
 		}
 	};
 	resetGame = () => {
@@ -100,7 +102,8 @@ class Board extends React.Component {
 	render() {
 		const { p1Score, p2Score, p1Temp, p2Temp } = this.state;
 		return (
-			<div className={styles.board}>
+			<div className={styles.boardContainer}>
+				{this.state.isWinner && <div className={styles.winnerMessage}></div>}
 				<Player playerNumber={1} tempScore={p1Temp} globalScore={p1Score} />
 				<div className={styles.middle}>
 					<Dice onChange={this.OnScoreChange} />
