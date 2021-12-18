@@ -33,10 +33,17 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	background-color: cornflowerblue;
+	background-color: rgb(255, 255, 255);
 	height: 665px;
 	width: 250px;
 	border: solid 1px black;
 	flex-direction: column;
 	align-content: center;
+}
+.winScoreInput {
+	text-align: center;
+	background: silver;
+	width: 112px;
+	height: 27px;
+	color: black;
 }

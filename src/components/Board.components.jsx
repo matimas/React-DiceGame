@@ -11,6 +11,7 @@ class Board extends React.Component {
 		p2Temp: 0,
 		playerTurn: 1,
 		winScore: 100,
+		isWinner: false,
 	};
 	OnScoreChange = (sum) => {
 		if (this.state.playerTurn === 1) {
@@ -31,13 +32,19 @@ class Board extends React.Component {
 	checkIfWin = () => {
 		console.log(this.state.playerTurn);
 		if (this.state.playerTurn === 1) {
-			if (this.state.p2Score >= this.state.winScore) {
-				console.log('winner');
-			}
+			setTimeout(() => {
+				if (this.state.p2Score >= this.state.winScore) {
+					console.log('winner');
+					this.resetGame();
+				}
+			}, 5000);
 		} else {
-			if (this.state.p1Score >= this.state.winScore) {
-				console.log('winner');
-			}
+			setTimeout(() => {
+				if (this.state.p1Score >= this.state.winScore) {
+					console.log('winner');
+					this.resetGame();
+				}
+			}, 5000);
 		}
 	};
 	resetGame = () => {
@@ -46,7 +53,21 @@ class Board extends React.Component {
 		});
 	};
 
+	ChangeWinScore = (e) => {
+		let winScoreNum = parseInt(e.target.value);
+		console.log(winScoreNum);
+		if (!winScoreNum) {
+			console.log(winScoreNum);
+			return;
+		}
+		this.setState((prevState) => {
+			return { winScore: e.target.value };
+		});
+		console.log('in the changeScore', e.target.value);
+		console.log(this.state);
+	};
 	HoldScore = () => {
+		console.log(this.state.winScore);
 		if (this.state.playerTurn === 1) {
 			document.querySelector('#player1').style.backgroundColor =
 				'rgb(74, 74, 74)';
@@ -86,6 +107,14 @@ class Board extends React.Component {
 					<button className={styles.holdButton} onClick={this.HoldScore}>
 						Hold
 					</button>
+					<input
+						className={styles.winScoreInput}
+						placeholder='FINAL SCORE'
+						type='text'
+						min='20'
+						max='1000'
+						onChange={this.ChangeWinScore}
+					/>
 					<button className={styles.holdButton} onClick={this.resetGame}>
 						New Game
 					</button>
