@@ -66,8 +66,8 @@
 .number6 {
 	background: url('assets/img/dice-6.png') no-repeat center center/cover;
 }
-/* 
-.dice1-shaking {
+
+.dices-shaking {
 	animation-name: wobble;
 	animation-duration: 1s;
 }
@@ -94,4 +94,4 @@
 	to {
 		transform: translate3d(0, 0, 0);
 	}
-}  */
+}

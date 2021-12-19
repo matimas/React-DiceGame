@@ -3,6 +3,10 @@ import './Dice.styles.css';
 class Dice extends React.Component {
 	state = { dice1: 0, dice2: 0, diceSum: 0, isSix: false };
 	RollDice = () => {
+		document.querySelector('#dices').className = 'dices-shaking';
+		setTimeout(() => {
+			document.querySelector('#dices').className = 'dices';
+		}, 1000);
 		const dice1 = Math.floor(Math.random() * 6) + 1;
 		const dice2 = Math.floor(Math.random() * 6) + 1;
 		if (dice1 === 6 && dice2 === 6) {
@@ -31,7 +35,7 @@ class Dice extends React.Component {
 		return (
 			<div className='dice-container'>
 				{this.state.isSix && <div className='six-message'></div>}
-				<div className='dices'>
+				<div className='dices' id='dices'>
 					<div className='dice1' id='dice1'></div>
 					<div className='dice2' id='dice2'></div>
 				</div>
