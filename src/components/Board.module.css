@@ -1,6 +1,5 @@
 .boardContainer {
-	background: url('./assets/Image/250-2506299_blackjack-background.jpg')
-		no-repeat center center/cover;
+	background: url('./assets/Image/blackjack.jpg') no-repeat center center/cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;

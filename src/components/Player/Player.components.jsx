@@ -1,11 +1,12 @@
 import styles from './Player.module.css';
 import React from 'react';
 import Counter from '../Counter/Counter.components';
-
-const Player = (props) => {
+//React.forwardRef//
+const Player = React.forwardRef((props, ref) => {
 	const { globalScore, tempScore, playerNumber } = props;
 	return (
 		<div
+			ref={ref}
 			id={`player${playerNumber}`}
 			className={(`player-${playerNumber}`, styles.player)}
 		>
@@ -14,5 +15,5 @@ const Player = (props) => {
 			<Counter playerNumber={playerNumber} isTemp={true} score={tempScore} />
 		</div>
 	);
-};
+});
 export default Player;

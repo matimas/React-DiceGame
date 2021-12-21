@@ -1,11 +1,18 @@
 import React from 'react';
 import './Dice.styles.css';
 class Dice extends React.Component {
-	state = { dice1: 0, dice2: 0, diceSum: 0, isSix: false };
+	constructor(props) {
+		super(props);
+		this.state = { dice1: 0, dice2: 0, diceSum: 0, isSix: false };
+		this.dice1REf = React.createRef();
+		this.dice2REf = React.createRef();
+		this.dicesRef = React.createRef();
+	}
+
 	rotateDices = () => {
-		document.querySelector('#dices').className = 'dices-shaking';
+		this.dicesRef.current.className = 'dices-shaking';
 		setTimeout(() => {
-			document.querySelector('#dices').className = 'dices';
+			this.dicesRef.current.className = 'dices';
 		}, 1000);
 	};
 
@@ -31,17 +38,24 @@ class Dice extends React.Component {
 		}
 	};
 	AssignResDice = () => {
-		document.querySelector('#dice1').className = `number${this.state.dice1}`;
-		document.querySelector('#dice2').className = `number${this.state.dice2}`;
+		this.dice1REf.current.className = `number${this.state.dice1}`;
+		this.dice2REf.current.className = `number${this.state.dice2}`;
 		this.props.onChange(this.state.diceSum);
+	};
+	DoubleSix = () => {
+		if (this.state.isSix) {
+			return <div className={'six-message'}></div>;
+		} else {
+			return null;
+		}
 	};
 	render() {
 		return (
 			<div className='dice-container'>
-				{this.state.isSix && <div className='six-message'></div>}
-				<div className='dices' id='dices'>
-					<div className='dice1' id='dice1'></div>
-					<div className='dice2' id='dice2'></div>
+				{this.DoubleSix()}
+				<div ref={this.dicesRef} className='dices' id='dices'>
+					<div ref={this.dice1REf} className='dice1' id='dice1'></div>
+					<div ref={this.dice2REf} className='dice2' id='dice2'></div>
 				</div>
 				<button
 					className='ThrowDiceButtton'

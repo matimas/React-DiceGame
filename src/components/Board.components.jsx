@@ -4,15 +4,21 @@ import Dice from './Dice/Dice.components';
 import styles from './Board.module.css';
 
 class Board extends React.Component {
-	state = {
-		p1Score: 0,
-		p2Score: 0,
-		p1Temp: 0,
-		p2Temp: 0,
-		playerTurn: 1,
-		winScore: 100,
-		isWinner: false,
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			p1Score: 0,
+			p2Score: 0,
+			p1Temp: 0,
+			p2Temp: 0,
+			playerTurn: 1,
+			winScore: 100,
+			isWinner: false,
+		};
+		this.player1Ref = React.createRef();
+		this.player2Ref = React.createRef();
+	}
+
 	OnScoreChange = (sum) => {
 		if (this.state.playerTurn === 1) {
 			if (sum === 0) {
@@ -30,7 +36,6 @@ class Board extends React.Component {
 		}
 	};
 	checkIfWin = () => {
-		console.log(this.state.playerTurn);
 		if (this.state.playerTurn === 1) {
 			if (this.state.p2Score >= this.state.winScore) {
 				this.setState({ isWinner: true });
@@ -51,30 +56,29 @@ class Board extends React.Component {
 	};
 	resetGame = () => {
 		this.setState((prevState) => {
-			return { p1Score: 0, p2Score: 0, p1Temp: 0, p2Temp: 0, playerTurn: 1 };
+			return {
+				p1Score: 0,
+				p2Score: 0,
+				p1Temp: 0,
+				p2Temp: 0,
+				playerTurn: prevState.playerTurn,
+			};
 		});
 	};
 
 	ChangeWinScore = (e) => {
 		let winScoreNum = parseInt(e.target.value);
-		console.log(winScoreNum);
 		if (!winScoreNum) {
-			console.log(winScoreNum);
 			return;
 		}
 		this.setState((prevState) => {
 			return { winScore: e.target.value };
 		});
-		console.log('in the changeScore', e.target.value);
-		console.log(this.state);
 	};
 	HoldScore = () => {
-		console.log(this.state.winScore);
 		if (this.state.playerTurn === 1) {
-			document.querySelector('#player1').style.backgroundColor =
-				'rgb(74, 74, 74)';
-			document.querySelector('#player2').style.backgroundColor =
-				'rgb(191, 191, 191)';
+			this.player1Ref.current.style.backgroundColor = 'rgb(74, 74, 74)';
+			this.player2Ref.current.style.backgroundColor = 'rgb(191, 191, 191)';
 			this.setState(
 				{
 					p1Score: this.state.p1Score + this.state.p1Temp,
@@ -85,10 +89,8 @@ class Board extends React.Component {
 			);
 		}
 		if (this.state.playerTurn === 2) {
-			document.querySelector('#player2').style.backgroundColor =
-				'rgb(74, 74, 74)';
-			document.querySelector('#player1').style.backgroundColor =
-				'rgb(191, 191, 191)';
+			this.player2Ref.current.style.backgroundColor = 'rgb(74, 74, 74)';
+			this.player1Ref.current.style.backgroundColor = 'rgb(191, 191, 191)';
 			this.setState(
 				{
 					p2Score: this.state.p2Score + this.state.p2Temp,
@@ -104,7 +106,12 @@ class Board extends React.Component {
 		return (
 			<div className={styles.boardContainer}>
 				{this.state.isWinner && <div className={styles.winnerMessage}></div>}
-				<Player playerNumber={1} tempScore={p1Temp} globalScore={p1Score} />
+				<Player
+					ref={this.player1Ref}
+					playerNumber={1}
+					tempScore={p1Temp}
+					globalScore={p1Score}
+				/>
 				<div className={styles.middle}>
 					<Dice onChange={this.OnScoreChange} />
 					<button className={styles.holdButton} onClick={this.HoldScore}>
@@ -122,7 +129,12 @@ class Board extends React.Component {
 						New Game
 					</button>
 				</div>
-				<Player playerNumber={2} tempScore={p2Temp} globalScore={p2Score} />
+				<Player
+					ref={this.player2Ref}
+					playerNumber={2}
+					tempScore={p2Temp}
+					globalScore={p2Score}
+				/>
 			</div>
 		);
 	}
